@@ -3,14 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/My Projects/Cat Organiser/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.28476443917399125" />
       </map>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
+    <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

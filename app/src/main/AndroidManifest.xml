@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CatOrganiser">
         <activity
-            android:name="com.example.com.bbdevs.app.MainActivity"
+            android:name="MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
