@@ -1,4 +1,4 @@
-package com.example.catorganiser
+package com.bbdevs.app
 
 import org.junit.Test
 
