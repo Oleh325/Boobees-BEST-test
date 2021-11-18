@@ -8,78 +8,196 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!-- Edit text to enter name -->
-    <EditText
-        android:id="@+id/enterName"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Name"
-        android:textSize="22sp"
-        android:layout_margin="20sp"/>
+        android:layout_height="match_parent">
 
-    <!-- Edit text to enter age -->
-    <EditText
-        android:id="@+id/enterAge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20sp"
-        android:textSize="22sp"
-        android:hint="Enter Age"/>
-
-    <!-- Button to add Name -->
-    <Button
-        android:id="@+id/addName"
-        android:layout_width="150sp"
-        android:layout_gravity="center"
-        android:background="#0000ff"
-        android:text="Add Name"
-        android:textColor="@color/purple_500"
-        android:textSize="20sp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"/>
-
-    <!-- Button to print Name -->
-    <Button
-        android:id="@+id/printName"
-        android:layout_width="150sp"
-        android:layout_gravity="center"
-        android:background="@color/purple_500"
-        android:text="Print Name"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <!-- Text view to get all name -->
-        <TextView
-            android:id="@+id/Name"
-            android:textAlignment="center"
-            android:layout_weight="1"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20sp"
-            android:text="Name\n\n"
-            android:textSize="22sp"
-            android:padding="10sp"
-            android:textColor="#000000"/>
+            android:orientation="vertical" >
 
-        <!-- Text view to get all ages -->
-        <TextView
-            android:layout_weight="1"
-            android:id="@+id/Age"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20sp"
-            android:text="Age\n\n"
-            android:textSize="22sp"
-            android:padding="10sp"
-            android:textColor="#000000"/>
+            <EditText
+                android:id="@+id/enterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20sp"
+                android:hint="Enter task name"
+                android:textSize="22sp" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/enterDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20sp"
+                android:hint="Enter description"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/enterReward"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20sp"
+                android:hint="Choose task's reward"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/enterDeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20sp"
+                android:hint="Enter task's deadline"
+                android:textSize="22sp" />
+            <EditText
+                android:id="@+id/enterBalance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20sp"
+                android:hint="Enter balance"
+                android:textSize="22sp" />
+            <EditText
+                android:id="@+id/enterCatHealth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20sp"
+                android:hint="Enter cat health"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/addTask"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20sp"
+                android:background="#0000ff"
+                android:text="Add Task"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/addUserInfo"
+                android:layout_width="200sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20sp"
+                android:background="#0000ff"
+                android:text="Add UserInfo"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/printTask"
+                android:layout_width="170sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20sp"
+                android:background="@color/purple_500"
+                android:text="Print Task"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/printUserInfo"
+                android:layout_width="220sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20sp"
+                android:background="@color/purple_500"
+                android:text="Print UserInfo"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
+                    android:layout_weight="1"
+                    android:padding="10sp"
+                    android:text="Name\n\n"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/Description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
+                    android:layout_weight="1"
+                    android:padding="10sp"
+                    android:text="Description\n\n"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Reward"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
+                    android:layout_weight="1"
+                    android:padding="10sp"
+                    android:text="Reward\n\n"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/Deadline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
+                    android:layout_weight="1"
+                    android:padding="10sp"
+                    android:text="Deadline\n\n"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Balance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
+                    android:layout_weight="1"
+                    android:padding="10sp"
+                    android:text="Balance\n\n"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/CatHealth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
+                    android:layout_weight="1"
+                    android:padding="10sp"
+                    android:text="CatHealth\n\n"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

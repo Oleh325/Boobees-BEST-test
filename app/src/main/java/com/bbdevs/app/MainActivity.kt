@@ -11,60 +11,59 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        addName.setOnClickListener{
 
-            // below we have created
-            // a new DBHelper class,
-            // and passed context to it
-            val db = DBHelper(this, null)
-
-            // creating variables for values
-            // in name and age edit texts
+        addTask.setOnClickListener{
+            val db = CatsDB(this, null)
             val name = enterName.text.toString()
-            val age = enterAge.text.toString()
-
-            // calling method to add
-            // name to our database
-            db.addName(name, age)
-
-            // Toast to message on the screen
-            Toast.makeText(this, name + " added to database", Toast.LENGTH_LONG).show()
-
-            // at last, clearing edit texts
+            val description = enterDescription.text.toString()
+            val reward = enterReward.text.toString()
+            val deadline = enterDeadline.text.toString()
+            db.addTask(name, description, reward, deadline)
+            Toast.makeText(this, "$name added to database", Toast.LENGTH_LONG).show()
             enterName.text.clear()
-            enterAge.text.clear()
+            enterDescription.text.clear()
+            enterReward.text.clear()
+            enterDeadline.text.clear()
         }
 
-        // below code is to add on  click
-        // listener to our print name button
-        printName.setOnClickListener{
-
-            // creating a DBHelper class
-            // and passing context to it
-            val db = DBHelper(this, null)
-
-            // below is the variable for cursor
-            // we have called method to get
-            // all names from our database
-            // and add to name text view
-            val cursor = db.getName()
-
-            // moving the cursor to first position and
-            // appending value in the text view
+        printTask.setOnClickListener{
+            val db = CatsDB(this, null)
+            val cursor = db.getTask()
             cursor!!.moveToFirst()
-            Name.append(cursor.getString(cursor.getColumnIndex(DBHelper.NAME_COl)) + "\n")
-            Age.append(cursor.getString(cursor.getColumnIndex(DBHelper.AGE_COL)) + "\n")
-
-            // moving our cursor to next
-            // position and appending values
+            Name.append("${cursor.getString(cursor.getColumnIndex(CatsDB.NAME))}\n")
+            Description.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DESCRIPTION))}\n")
+            Reward.append("${cursor.getString(cursor.getColumnIndex(CatsDB.REWARD))}\n")
+            Deadline.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DEADLINE))}\n")
             while(cursor.moveToNext()){
-                Name.append(cursor.getString(cursor.getColumnIndex(DBHelper.NAME_COl)) + "\n")
-                Age.append(cursor.getString(cursor.getColumnIndex(DBHelper.AGE_COL)) + "\n")
+                Name.append("${cursor.getString(cursor.getColumnIndex(CatsDB.NAME))}\n")
+                Description.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DESCRIPTION))}\n")
+                Reward.append("${cursor.getString(cursor.getColumnIndex(CatsDB.REWARD))}\n")
+                Deadline.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DEADLINE))}\n")
             }
+            cursor.close()
+        }
 
-            // at last we close our cursor
+        addUserInfo.setOnClickListener{
+            val db = CatsDB(this, null)
+            val balance = enterBalance.text.toString()
+            val catHealth = enterCatHealth.text.toString()
+            db.addUserInfo(balance, catHealth)
+            Toast.makeText(this, "userInfo added to database", Toast.LENGTH_LONG).show()
+            enterBalance.text.clear()
+            enterCatHealth.text.clear()
+        }
+
+        printUserInfo.setOnClickListener{
+            val db = CatsDB(this, null)
+            val cursor = db.getUserInfo()
+            cursor!!.moveToFirst()
+            Balance.append("${cursor.getString(cursor.getColumnIndex(CatsDB.BALANCE))}\n")
+            CatHealth.append("${cursor.getString(cursor.getColumnIndex(CatsDB.CAT_HEALTH))}\n")
+            while(cursor.moveToNext()){
+                Balance.append("${cursor.getString(cursor.getColumnIndex(CatsDB.BALANCE))}\n")
+                CatHealth.append("${cursor.getString(cursor.getColumnIndex(CatsDB.CAT_HEALTH))}\n")
+            }
             cursor.close()
         }
     }
-
 }
