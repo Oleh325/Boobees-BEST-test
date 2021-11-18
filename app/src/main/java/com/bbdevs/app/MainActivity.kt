@@ -10,6 +10,9 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bbdevs.app.entity.Task
+import com.bbdevs.app.entity.UserInfo
+import com.bbdevs.app.service.TaskService
+import com.bbdevs.app.service.UserInfoService
 import com.bbdevs.app.util.DateTimeUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import java.time.LocalDate
@@ -25,11 +28,13 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Ti
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val db = CatAppDB(this, null)
-        setListeners(db, addTask, printTask, addUserInfo, printUserInfo)
+        val taskService = TaskService(db)
+        val userInfoService = UserInfoService(db)
+        setListeners(taskService, userInfoService, addTask, printTask, addUserInfo, printUserInfo)
     }
 
     @SuppressLint("Range")
-    private fun setListeners(db: CatAppDB, addTask: View, printTask: View, addUserInfo: View, printUserInfo: View) {
+    private fun setListeners(taskService: TaskService, userInfoService: UserInfoService, addTask: View, printTask: View, addUserInfo: View, printUserInfo: View) {
         addTask.setOnClickListener {
             val name = enterName.text.toString()
             val description = enterDescription.text.toString()
@@ -38,7 +43,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Ti
             if (name.isEmpty()) {
                 Toast.makeText(this, "Task name or reward cannot be empty!", Toast.LENGTH_LONG).show()
             }
-            db.addTask(Task(name, description, reward, deadline, isCompleted = false))
+            taskService.add(Task(null, name, description, reward, deadline, isCompleted = false))
             Toast.makeText(this, "$name added to database", Toast.LENGTH_LONG).show()
             enterName.text.clear()
             enterDescription.text.clear()
@@ -50,7 +55,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Ti
         }
 
         printTask.setOnClickListener{
-            val tasks = db.getTasks()
+            val tasks = taskService.get()
             for (task in tasks) {
                 Name.append("${task.name}\n")
                 Description.append("${task.description}\n")
@@ -60,16 +65,16 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Ti
         }
 
         addUserInfo.setOnClickListener{
-            val balance = enterBalance.text.toString()
-            val catHealth = enterCatHealth.text.toString()
-            db.updateUserInfo(balance, catHealth)
+            val balance = enterBalance.text.toString().toInt()
+            val catHealth = enterCatHealth.text.toString().toInt()
+            userInfoService.update(UserInfo(1, balance, catHealth))
             Toast.makeText(this, "userInfo added to database", Toast.LENGTH_LONG).show()
             enterBalance.text.clear()
             enterCatHealth.text.clear()
         }
 
         printUserInfo.setOnClickListener{
-            val userInfo = db.getUserInfo()
+            val userInfo = userInfoService.get()
             Balance.append("${userInfo.balance}\n")
             CatHealth.append("${userInfo.catHealth}\n")
         }

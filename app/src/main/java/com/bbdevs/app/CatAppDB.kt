@@ -59,6 +59,7 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         if (cursor == null || cursor.getCount() < 1) return list
         cursor.moveToFirst()
         list.add(Task(
+            cursor.getInt((cursor.getColumnIndex(TASK_ID))),
             cursor.getString(cursor.getColumnIndex(NAME)),
             cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
             cursor.getInt(cursor.getColumnIndex(REWARD)),
@@ -67,6 +68,7 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         ))
         while(cursor.moveToNext()) {
             list.add(Task(
+                cursor.getInt((cursor.getColumnIndex(TASK_ID))),
                 cursor.getString(cursor.getColumnIndex(NAME)),
                 cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
                 cursor.getInt(cursor.getColumnIndex(REWARD)),
@@ -78,10 +80,11 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         return list
     }
 
-    fun updateUserInfo(balance: String, cat_health: String) {
+    fun updateUserInfo(userInfo: UserInfo) {
         val values = ContentValues()
-        values.put(BALANCE, balance)
-        values.put(CAT_HEALTH, cat_health)
+        values.put(TASK_ID, userInfo.id)
+        values.put(BALANCE, userInfo.balance)
+        values.put(CAT_HEALTH, userInfo.catHealth)
         val db = this.writableDatabase
         db.update(USERINFO_TABLE, values, null, null)
     }
@@ -90,13 +93,25 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun getUserInfo(): UserInfo {
         val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM $USERINFO_TABLE", null)
-        val userInfo: UserInfo = UserInfo(0, 0)
+        val userInfo = UserInfo(1, 0, 0)
         if (cursor == null || cursor.getCount() < 1) return userInfo
         cursor.moveToFirst()
         userInfo.balance = cursor.getInt(cursor.getColumnIndex(BALANCE))
         userInfo.catHealth = cursor.getInt(cursor.getColumnIndex(CAT_HEALTH))
         cursor.close()
         return userInfo
+    }
+
+    fun updateTask(task: Task) {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(TASK_ID, task.id)
+        values.put(NAME, task.name)
+        values.put(DESCRIPTION, task.description)
+        values.put(REWARD, task.reward)
+        values.put(DEADLINE, task.deadline.toString())
+        values.put(IS_COMPLETED, task.isCompleted)
+        db.update(TASK_TABLE, values, null, null)
     }
 
     fun addStatistics(day_date : String, food_count : String,
