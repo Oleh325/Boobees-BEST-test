@@ -1,14 +1,25 @@
 package com.bbdevs.app
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.DatePicker
+import android.widget.TimePicker
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bbdevs.app.entity.Task
+import com.bbdevs.app.util.DateTimeUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+
+    lateinit var pickedDeadline: LocalDateTime
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,14 +33,20 @@ class MainActivity : AppCompatActivity() {
         addTask.setOnClickListener {
             val name = enterName.text.toString()
             val description = enterDescription.text.toString()
-            val reward = enterReward.text.toString()
-            val deadline = enterDeadline.text.toString()
-            db.addTask(Task(name, description, reward, deadline))
+            val reward = enterReward.text.toString().toInt()
+            val deadline = pickedDeadline
+            if (name.isEmpty()) {
+                Toast.makeText(this, "Task name or reward cannot be empty!", Toast.LENGTH_LONG).show()
+            }
+            db.addTask(Task(name, description, reward, deadline, isCompleted = false))
             Toast.makeText(this, "$name added to database", Toast.LENGTH_LONG).show()
             enterName.text.clear()
             enterDescription.text.clear()
             enterReward.text.clear()
-            enterDeadline.text.clear()
+        }
+
+        addDeadline.setOnClickListener {
+            pickDate()
         }
 
         printTask.setOnClickListener{
@@ -38,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 Name.append("${task.name}\n")
                 Description.append("${task.description}\n")
                 Reward.append("${task.reward}\n")
-                Deadline.append("${task.deadline}\n")
+                Deadline.append("${DateTimeUtil.toHumanReadableFormat(task.deadline)}\n")
             }
         }
 
@@ -62,5 +79,26 @@ class MainActivity : AppCompatActivity() {
             }
             cursor.close()
         }
+    }
+
+    private fun pickDate() {
+        val cal = Calendar.getInstance()
+        DatePickerDialog(this, this,
+            cal.get(Calendar.YEAR),
+            cal.get(Calendar.MONTH),
+            cal.get(Calendar.DAY_OF_MONTH)).show()
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        pickedDeadline = LocalDateTime.of(LocalDate.of(year, month, dayOfMonth), LocalTime.now())
+        val cal = Calendar.getInstance()
+        TimePickerDialog(this, this,
+            cal.get(Calendar.HOUR),
+            cal.get(Calendar.MINUTE),
+            true).show()
+    }
+
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        pickedDeadline = LocalDateTime.of(pickedDeadline.toLocalDate(), LocalTime.of(hourOfDay, minute))
     }
 }

@@ -39,28 +39,36 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20sp"
                 android:hint="Choose task's reward"
+                android:inputType="number"
                 android:textSize="22sp" />
 
-            <EditText
-                android:id="@+id/enterDeadline"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/addDeadline"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20sp"
-                android:hint="Enter task's deadline"
-                android:textSize="22sp" />
+                android:layout_gravity="center"
+                android:layout_marginTop="20sp"
+                android:background="#0000ff"
+                android:text="Add deadline"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
             <EditText
                 android:id="@+id/enterBalance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20sp"
                 android:hint="Enter balance"
+                android:inputType="number"
                 android:textSize="22sp" />
+
             <EditText
                 android:id="@+id/enterCatHealth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20sp"
                 android:hint="Enter cat health"
+                android:inputType="number"
                 android:textSize="22sp" />
 
             <Button
@@ -196,6 +204,7 @@
                     android:textSize="22sp" />
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.bbdevs.app.entity.Task
+import java.time.LocalDateTime
 
 class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
@@ -39,7 +40,7 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put(NAME, task.name)
         values.put(DESCRIPTION, task.description)
         values.put(REWARD, task.reward)
-        values.put(DEADLINE, task.deadline)
+        values.put(DEADLINE, task.deadline.toString())
         values.put(IS_COMPLETED, FALSE)
         val db = this.writableDatabase
         db.insert(TASK_TABLE, null, values)
@@ -55,15 +56,17 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         list.add(Task(
             cursor.getString(cursor.getColumnIndex(NAME)),
             cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
-            cursor.getString(cursor.getColumnIndex(REWARD)),
-            cursor.getString(cursor.getColumnIndex(DEADLINE))
+            cursor.getInt(cursor.getColumnIndex(REWARD)),
+            LocalDateTime.parse(cursor.getString(cursor.getColumnIndex(DEADLINE))),
+            cursor.getInt(cursor.getColumnIndex(IS_COMPLETED)) == 1
         ))
         while(cursor.moveToNext()){
             list.add(Task(
                 cursor.getString(cursor.getColumnIndex(NAME)),
                 cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
-                cursor.getString(cursor.getColumnIndex(REWARD)),
-                cursor.getString(cursor.getColumnIndex(DEADLINE))
+                cursor.getInt(cursor.getColumnIndex(REWARD)),
+                LocalDateTime.parse(cursor.getString(cursor.getColumnIndex(DEADLINE))),
+                cursor.getInt(cursor.getColumnIndex(IS_COMPLETED)) == 1
             ))
         }
         cursor.close()
