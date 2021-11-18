@@ -11,9 +11,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val db = CatAppDB(this, null)
 
         addTask.setOnClickListener{
-            val db = CatAppDB(this, null)
             val name = enterName.text.toString()
             val description = enterDescription.text.toString()
             val reward = enterReward.text.toString()
@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         printTask.setOnClickListener{
-            val db = CatAppDB(this, null)
             val cursor = db.getTask()
             cursor!!.moveToFirst()
             Name.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.NAME))}\n")
@@ -44,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         addUserInfo.setOnClickListener{
-            val db = CatAppDB(this, null)
             val balance = enterBalance.text.toString()
             val catHealth = enterCatHealth.text.toString()
             db.addUserInfo(balance, catHealth)
@@ -54,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         printUserInfo.setOnClickListener{
-            val db = CatAppDB(this, null)
             val cursor = db.getUserInfo()
             cursor!!.moveToFirst()
             Balance.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.BALANCE))}\n")
