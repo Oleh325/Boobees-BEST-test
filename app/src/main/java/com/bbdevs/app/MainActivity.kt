@@ -2,18 +2,23 @@ package com.bbdevs.app
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("Range")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val db = CatAppDB(this, null)
+        setListeners(db, addTask, printTask, addUserInfo, printUserInfo)
+    }
 
-        addTask.setOnClickListener{
+    @SuppressLint("Range")
+    private fun setListeners(db: CatAppDB, addTask: View, printTask: View, addUserInfo: View, printUserInfo: View) {
+        addTask.setOnClickListener {
             val name = enterName.text.toString()
             val description = enterDescription.text.toString()
             val reward = enterReward.text.toString()
