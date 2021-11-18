@@ -1,10 +1,12 @@
 package com.bbdevs.app
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.bbdevs.app.entity.Task
 
 class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
@@ -32,21 +34,40 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         onCreate(db)
     }
 
-    fun addTask(name : String, description : String,
-                reward : String, deadline : String ){
+    fun addTask(task: Task){
         val values = ContentValues()
-        values.put(NAME, name)
-        values.put(DESCRIPTION, description)
-        values.put(REWARD, reward)
-        values.put(DEADLINE, deadline)
+        values.put(NAME, task.name)
+        values.put(DESCRIPTION, task.description)
+        values.put(REWARD, task.reward)
+        values.put(DEADLINE, task.deadline)
         values.put(IS_COMPLETED, FALSE)
         val db = this.writableDatabase
         db.insert(TASK_TABLE, null, values)
     }
 
-    fun getTask(): Cursor? {
+    @SuppressLint("Range")
+    fun getTasks(): List<Task> {
         val db = this.readableDatabase
-        return db.rawQuery("SELECT * FROM $TASK_TABLE", null)
+        var cursor = db.rawQuery("SELECT * FROM $TASK_TABLE", null)
+        val list = ArrayList<Task>()
+        if (cursor == null || cursor.getCount() < 1) return list
+        cursor.moveToFirst()
+        list.add(Task(
+            cursor.getString(cursor.getColumnIndex(NAME)),
+            cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
+            cursor.getString(cursor.getColumnIndex(REWARD)),
+            cursor.getString(cursor.getColumnIndex(DEADLINE))
+        ))
+        while(cursor.moveToNext()){
+            list.add(Task(
+                cursor.getString(cursor.getColumnIndex(NAME)),
+                cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
+                cursor.getString(cursor.getColumnIndex(REWARD)),
+                cursor.getString(cursor.getColumnIndex(DEADLINE))
+            ))
+        }
+        cursor.close()
+        return list
     }
 
     fun addStatistics(day_date : String, food_count : String,

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import com.bbdevs.app.entity.Task
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             val description = enterDescription.text.toString()
             val reward = enterReward.text.toString()
             val deadline = enterDeadline.text.toString()
-            db.addTask(name, description, reward, deadline)
+            db.addTask(Task(name, description, reward, deadline))
             Toast.makeText(this, "$name added to database", Toast.LENGTH_LONG).show()
             enterName.text.clear()
             enterDescription.text.clear()
@@ -32,19 +33,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         printTask.setOnClickListener{
-            val cursor = db.getTask()
-            cursor!!.moveToFirst()
-            Name.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.NAME))}\n")
-            Description.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.DESCRIPTION))}\n")
-            Reward.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.REWARD))}\n")
-            Deadline.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.DEADLINE))}\n")
-            while(cursor.moveToNext()){
-                Name.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.NAME))}\n")
-                Description.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.DESCRIPTION))}\n")
-                Reward.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.REWARD))}\n")
-                Deadline.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.DEADLINE))}\n")
+            val tasks = db.getTasks()
+            for (task in tasks) {
+                Name.append("${task.name}\n")
+                Description.append("${task.description}\n")
+                Reward.append("${task.reward}\n")
+                Deadline.append("${task.deadline}\n")
             }
-            cursor.close()
         }
 
         addUserInfo.setOnClickListener{
