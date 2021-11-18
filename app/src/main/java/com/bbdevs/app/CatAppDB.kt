@@ -45,7 +45,7 @@ class CatsDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put(DESCRIPTION, description)
         values.put(REWARD, reward)
         values.put(DEADLINE, deadline)
-        values.put(IS_COMPLETED, "0")
+        values.put(IS_COMPLETED, FALSE)
         val db = this.writableDatabase
         db.insert(TASK_TABLE, null, values)
         db.close()
@@ -106,5 +106,7 @@ class CatsDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         val WORKTIME = "worktime"
         val BALANCE = "balance"
         val CAT_HEALTH = "cat_health"
+
+        val FALSE = "0"
     }
 }
