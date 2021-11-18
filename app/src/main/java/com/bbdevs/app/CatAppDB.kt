@@ -42,7 +42,6 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put(IS_COMPLETED, FALSE)
         val db = this.writableDatabase
         db.insert(TASK_TABLE, null, values)
-        db.close()
     }
 
     fun getTask(): Cursor? {
@@ -58,7 +57,6 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put(WORKTIME, worktime)
         val db = this.writableDatabase
         db.insert(STATISTICS_TABLE, null, values)
-        db.close()
     }
 
     fun getStatistics(): Cursor? {
@@ -72,7 +70,6 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put(CAT_HEALTH, cat_health)
         val db = this.writableDatabase
         db.insert(USERINFO_TABLE, null, values)
-        db.close()
     }
 
     fun getUserInfo(): Cursor? {
