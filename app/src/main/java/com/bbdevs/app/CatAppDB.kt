@@ -10,24 +10,18 @@ class CatsDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
-        val tasks = ("CREATE TABLE IF NOT EXISTS " + TASK_TABLE + " ("
-                + TASK_ID + " INTEGER PRIMARY KEY, " +
-                NAME + " TEXT NOT NULL," +
-                DESCRIPTION + " TEXT," +
-                REWARD + " INTEGER NOT NULL," +
-                DEADLINE + " DATE," +
-                IS_COMPLETED + " TINYINT(1) NOT NULL" + ")")
+        val tasks = ("CREATE TABLE IF NOT EXISTS $TASK_TABLE" +
+                "($TASK_ID INTEGER PRIMARY KEY, $NAME TEXT NOT NULL, " +
+                "$DESCRIPTION TEXT, $REWARD INTEGER NOT NULL, $DEADLINE DATE, " +
+                "$IS_COMPLETED TINYINT(1) NOT NULL)")
         db.execSQL(tasks)
-        val statistics = ("CREATE TABLE IF NOT EXISTS " + STATISTICS_TABLE + " ("
-                + STATISTICS_ID + " INTEGER PRIMARY KEY, " +
-                DAY_DATE + " DATE NOT NULL," +
-                FOOD_COUNT + " INTEGER NOT NULL," +
-                WORKTIME + " INTEGER NOT NULL" + ")")
+        val statistics = ("CREATE TABLE IF NOT EXISTS $STATISTICS_TABLE" +
+                "($STATISTICS_ID INTEGER PRIMARY KEY, $DAY_DATE DATE NOT NULL, " +
+                "$FOOD_COUNT INTEGER NOT NULL, $WORKTIME INTEGER NOT NULL)")
         db.execSQL(statistics)
-        val userInfo = ("CREATE TABLE IF NOT EXISTS " + USERINFO_TABLE + " ("
-                + USERINFO_ID + " INTEGER PRIMARY KEY, " +
-                BALANCE + " INTEGER NOT NULL," +
-                CAT_HEALTH + " INTEGER NOT NULL" + ")")
+        val userInfo = ("CREATE TABLE IF NOT EXISTS $USERINFO_TABLE" +
+                "($USERINFO_ID INTEGER PRIMARY KEY, $BALANCE INTEGER NOT NULL, " +
+                "$CAT_HEALTH INTEGER NOT NULL)")
         db.execSQL(userInfo)
     }
 
@@ -53,7 +47,7 @@ class CatsDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
 
     fun getTask(): Cursor? {
         val db = this.readableDatabase
-        return db.rawQuery("SELECT * FROM TASK_TABLE", null)
+        return db.rawQuery("SELECT * FROM $TASK_TABLE", null)
     }
 
     fun addStatistics(day_date : String, food_count : String,

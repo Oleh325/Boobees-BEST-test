@@ -30,15 +30,15 @@ class MainActivity : AppCompatActivity() {
             val db = CatsDB(this, null)
             val cursor = db.getTask()
             cursor!!.moveToFirst()
-            Name.append(cursor.getString(cursor.getColumnIndex(CatsDB.NAME)) + "\n")
-            Description.append(cursor.getString(cursor.getColumnIndex(CatsDB.DESCRIPTION)) + "\n")
-            Reward.append(cursor.getString(cursor.getColumnIndex(CatsDB.REWARD)) + "\n")
-            Deadline.append(cursor.getString(cursor.getColumnIndex(CatsDB.DEADLINE)) + "\n")
+            Name.append("${cursor.getString(cursor.getColumnIndex(CatsDB.NAME))}\n")
+            Description.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DESCRIPTION))}\n")
+            Reward.append("${cursor.getString(cursor.getColumnIndex(CatsDB.REWARD))}\n")
+            Deadline.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DEADLINE))}\n")
             while(cursor.moveToNext()){
-                Name.append(cursor.getString(cursor.getColumnIndex(CatsDB.NAME)) + "\n")
-                Description.append(cursor.getString(cursor.getColumnIndex(CatsDB.DESCRIPTION)) + "\n")
-                Reward.append(cursor.getString(cursor.getColumnIndex(CatsDB.REWARD)) + "\n")
-                Deadline.append(cursor.getString(cursor.getColumnIndex(CatsDB.DEADLINE)) + "\n")
+                Name.append("${cursor.getString(cursor.getColumnIndex(CatsDB.NAME))}\n")
+                Description.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DESCRIPTION))}\n")
+                Reward.append("${cursor.getString(cursor.getColumnIndex(CatsDB.REWARD))}\n")
+                Deadline.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DEADLINE))}\n")
             }
             cursor.close()
         }
@@ -57,11 +57,11 @@ class MainActivity : AppCompatActivity() {
             val db = CatsDB(this, null)
             val cursor = db.getUserInfo()
             cursor!!.moveToFirst()
-            Balance.append(cursor.getString(cursor.getColumnIndex(CatsDB.BALANCE)) + "\n")
-            CatHealth.append(cursor.getString(cursor.getColumnIndex(CatsDB.CAT_HEALTH)) + "\n")
+            Balance.append("${cursor.getString(cursor.getColumnIndex(CatsDB.BALANCE))}\n")
+            CatHealth.append("${cursor.getString(cursor.getColumnIndex(CatsDB.CAT_HEALTH))}\n")
             while(cursor.moveToNext()){
-                Balance.append(cursor.getString(cursor.getColumnIndex(CatsDB.BALANCE)) + "\n")
-                CatHealth.append(cursor.getString(cursor.getColumnIndex(CatsDB.CAT_HEALTH)) + "\n")
+                Balance.append("${cursor.getString(cursor.getColumnIndex(CatsDB.BALANCE))}\n")
+                CatHealth.append("${cursor.getString(cursor.getColumnIndex(CatsDB.CAT_HEALTH))}\n")
             }
             cursor.close()
         }
