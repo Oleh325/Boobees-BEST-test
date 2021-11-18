@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         addTask.setOnClickListener{
-            val db = CatsDB(this, null)
+            val db = CatAppDB(this, null)
             val name = enterName.text.toString()
             val description = enterDescription.text.toString()
             val reward = enterReward.text.toString()
@@ -27,24 +27,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         printTask.setOnClickListener{
-            val db = CatsDB(this, null)
+            val db = CatAppDB(this, null)
             val cursor = db.getTask()
             cursor!!.moveToFirst()
-            Name.append("${cursor.getString(cursor.getColumnIndex(CatsDB.NAME))}\n")
-            Description.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DESCRIPTION))}\n")
-            Reward.append("${cursor.getString(cursor.getColumnIndex(CatsDB.REWARD))}\n")
-            Deadline.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DEADLINE))}\n")
+            Name.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.NAME))}\n")
+            Description.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.DESCRIPTION))}\n")
+            Reward.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.REWARD))}\n")
+            Deadline.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.DEADLINE))}\n")
             while(cursor.moveToNext()){
-                Name.append("${cursor.getString(cursor.getColumnIndex(CatsDB.NAME))}\n")
-                Description.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DESCRIPTION))}\n")
-                Reward.append("${cursor.getString(cursor.getColumnIndex(CatsDB.REWARD))}\n")
-                Deadline.append("${cursor.getString(cursor.getColumnIndex(CatsDB.DEADLINE))}\n")
+                Name.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.NAME))}\n")
+                Description.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.DESCRIPTION))}\n")
+                Reward.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.REWARD))}\n")
+                Deadline.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.DEADLINE))}\n")
             }
             cursor.close()
         }
 
         addUserInfo.setOnClickListener{
-            val db = CatsDB(this, null)
+            val db = CatAppDB(this, null)
             val balance = enterBalance.text.toString()
             val catHealth = enterCatHealth.text.toString()
             db.addUserInfo(balance, catHealth)
@@ -54,14 +54,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         printUserInfo.setOnClickListener{
-            val db = CatsDB(this, null)
+            val db = CatAppDB(this, null)
             val cursor = db.getUserInfo()
             cursor!!.moveToFirst()
-            Balance.append("${cursor.getString(cursor.getColumnIndex(CatsDB.BALANCE))}\n")
-            CatHealth.append("${cursor.getString(cursor.getColumnIndex(CatsDB.CAT_HEALTH))}\n")
+            Balance.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.BALANCE))}\n")
+            CatHealth.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.CAT_HEALTH))}\n")
             while(cursor.moveToNext()){
-                Balance.append("${cursor.getString(cursor.getColumnIndex(CatsDB.BALANCE))}\n")
-                CatHealth.append("${cursor.getString(cursor.getColumnIndex(CatsDB.CAT_HEALTH))}\n")
+                Balance.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.BALANCE))}\n")
+                CatHealth.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.CAT_HEALTH))}\n")
             }
             cursor.close()
         }
