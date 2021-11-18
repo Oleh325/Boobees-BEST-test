@@ -19,7 +19,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    lateinit var pickedDeadline: LocalDateTime
+    private lateinit var pickedDeadline: LocalDateTime
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,22 +62,16 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Ti
         addUserInfo.setOnClickListener{
             val balance = enterBalance.text.toString()
             val catHealth = enterCatHealth.text.toString()
-            db.addUserInfo(balance, catHealth)
+            db.updateUserInfo(balance, catHealth)
             Toast.makeText(this, "userInfo added to database", Toast.LENGTH_LONG).show()
             enterBalance.text.clear()
             enterCatHealth.text.clear()
         }
 
         printUserInfo.setOnClickListener{
-            val cursor = db.getUserInfo()
-            cursor!!.moveToFirst()
-            Balance.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.BALANCE))}\n")
-            CatHealth.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.CAT_HEALTH))}\n")
-            while(cursor.moveToNext()){
-                Balance.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.BALANCE))}\n")
-                CatHealth.append("${cursor.getString(cursor.getColumnIndex(CatAppDB.CAT_HEALTH))}\n")
-            }
-            cursor.close()
+            val userInfo = db.getUserInfo()
+            Balance.append("${userInfo.balance}\n")
+            CatHealth.append("${userInfo.catHealth}\n")
         }
     }
 

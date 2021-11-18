@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.bbdevs.app.entity.Task
+import com.bbdevs.app.entity.UserInfo
 import java.time.LocalDateTime
 
 class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
@@ -26,6 +27,10 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                 "($USERINFO_ID INTEGER PRIMARY KEY, $BALANCE INTEGER NOT NULL, " +
                 "$CAT_HEALTH INTEGER NOT NULL)")
         db.execSQL(userInfo)
+        val initUserInfo = ContentValues()
+        initUserInfo.put(BALANCE, 10)
+        initUserInfo.put(CAT_HEALTH, 15)
+        db.insert(USERINFO_TABLE, null, initUserInfo)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, p1: Int, p2: Int) {
@@ -35,7 +40,7 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         onCreate(db)
     }
 
-    fun addTask(task: Task){
+    fun addTask(task: Task) {
         val values = ContentValues()
         values.put(NAME, task.name)
         values.put(DESCRIPTION, task.description)
@@ -49,7 +54,7 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     @SuppressLint("Range")
     fun getTasks(): List<Task> {
         val db = this.readableDatabase
-        var cursor = db.rawQuery("SELECT * FROM $TASK_TABLE", null)
+        val cursor = db.rawQuery("SELECT * FROM $TASK_TABLE", null)
         val list = ArrayList<Task>()
         if (cursor == null || cursor.getCount() < 1) return list
         cursor.moveToFirst()
@@ -60,7 +65,7 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
             LocalDateTime.parse(cursor.getString(cursor.getColumnIndex(DEADLINE))),
             cursor.getInt(cursor.getColumnIndex(IS_COMPLETED)) == 1
         ))
-        while(cursor.moveToNext()){
+        while(cursor.moveToNext()) {
             list.add(Task(
                 cursor.getString(cursor.getColumnIndex(NAME)),
                 cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
@@ -71,6 +76,27 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         }
         cursor.close()
         return list
+    }
+
+    fun updateUserInfo(balance: String, cat_health: String) {
+        val values = ContentValues()
+        values.put(BALANCE, balance)
+        values.put(CAT_HEALTH, cat_health)
+        val db = this.writableDatabase
+        db.update(USERINFO_TABLE, values, null, null)
+    }
+
+    @SuppressLint("Range")
+    fun getUserInfo(): UserInfo {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $USERINFO_TABLE", null)
+        val userInfo: UserInfo = UserInfo(0, 0)
+        if (cursor == null || cursor.getCount() < 1) return userInfo
+        cursor.moveToFirst()
+        userInfo.balance = cursor.getInt(cursor.getColumnIndex(BALANCE))
+        userInfo.catHealth = cursor.getInt(cursor.getColumnIndex(CAT_HEALTH))
+        cursor.close()
+        return userInfo
     }
 
     fun addStatistics(day_date : String, food_count : String,
@@ -88,20 +114,7 @@ class CatAppDB(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         return db.rawQuery("SELECT * FROM $STATISTICS_TABLE", null)
     }
 
-    fun addUserInfo(balance : String, cat_health : String ){
-        val values = ContentValues()
-        values.put(BALANCE, balance)
-        values.put(CAT_HEALTH, cat_health)
-        val db = this.writableDatabase
-        db.insert(USERINFO_TABLE, null, values)
-    }
-
-    fun getUserInfo(): Cursor? {
-        val db = this.readableDatabase
-        return db.rawQuery("SELECT * FROM $USERINFO_TABLE", null)
-    }
-
-    companion object Tasks{
+    companion object Tasks {
         // all database's variables
         private val DATABASE_NAME = "cat_app_database"
         private val DATABASE_VERSION = 1
