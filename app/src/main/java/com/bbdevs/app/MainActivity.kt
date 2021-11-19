@@ -55,6 +55,8 @@ class MainActivity : AppCompatActivity() {
         val info = userInfoService.get()
         info.catHealth++
         info.balance--
+        progressTxt.text = "${info.catHealth}/35"
+        balanceTxt.text = "You have ${info.balance} food points"
         userInfoService.update(info)
         updateFoodBar(userInfoService)
     }
@@ -63,5 +65,7 @@ class MainActivity : AppCompatActivity() {
         val info = userInfoService.get()
         foodBar.max = 35
         foodBar.progress = info.catHealth
+        progressTxt.text = "${info.catHealth}/35"
+        balanceTxt.text = "You have ${info.balance} food points"
     }
 }
