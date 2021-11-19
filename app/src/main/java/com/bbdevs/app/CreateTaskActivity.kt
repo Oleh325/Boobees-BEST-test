@@ -17,9 +17,12 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.ColorUtils
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bbdevs.app.entity.Task
 import com.bbdevs.app.service.TaskService
+import com.bbdevs.app.util.TodoAdapter
 import kotlinx.android.synthetic.main.activity_create_task.*
+import kotlinx.android.synthetic.main.activity_main.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -28,6 +31,7 @@ import java.util.*
 class CreateTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private lateinit var pickedDeadline: LocalDateTime
+    lateinit var todoAdapter: TodoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +39,9 @@ class CreateTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         setContentView(R.layout.activity_create_task)
         val db = CatAppDB(this, null)
         val taskService = TaskService(db)
+        todoAdapter = TodoAdapter(mutableListOf())
+        todoItemsRecyclerView.layoutManager = LinearLayoutManager(this)
+        todoItemsRecyclerView.adapter = todoAdapter
         setListeners(taskService)
         addDeadline.setOnClickListener {
             pickDate()
@@ -90,7 +97,6 @@ class CreateTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                 }
             })
             colorAnimation.start()
-
         }
     }
 
@@ -105,6 +111,8 @@ class CreateTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                 Toast.makeText(this, "Task name or reward cannot be empty!", Toast.LENGTH_LONG)
                     .show()
             }
+            val todo = Todo(name, reward)
+            todoAdapter.addTodo(todo)
             taskService.add(Task(null, name, description, reward, deadline, isCompleted = false))
             Toast.makeText(this, "$name added to database", Toast.LENGTH_LONG).show()
             enterName.text.clear()

@@ -103,7 +103,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/todo_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:background="@color/gray"
         android:maxHeight="330dp"
         app:layout_constraintBottom_toTopOf="@+id/tabLayout"
@@ -114,13 +114,13 @@
             android:id="@+id/addTask"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:paddingLeft="4dp"
             android:paddingTop="4dp"
             android:paddingRight="4dp"
             android:paddingBottom="4dp"
             android:text="@string/plus"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView" />
 
@@ -142,8 +142,10 @@
         <ScrollView
             android:id="@+id/scrollView5"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/todoItemsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
