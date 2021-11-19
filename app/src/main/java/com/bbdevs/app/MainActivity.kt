@@ -3,6 +3,7 @@ package com.bbdevs.app
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val db = CatAppDB(this, null)
         val userInfoService = UserInfoService(db)
+
+        addTask.setOnClickListener(){
+            val intent = Intent(this, CreateTaskActivity::class.java)
+            startActivity(intent)
+        }
 
         addUserInfo.setOnClickListener{
             val balance = enterBalance.text.toString().toInt()
