@@ -50,13 +50,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
                     android:background="#1A565656"
                     android:text="Add deadline"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="207dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/enterDescription" />
                 <EditText
                     android:id="@+id/enterReward"
                     android:layout_width="match_parent"
@@ -128,7 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20sp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:backgroundTint="@color/white"
                     android:foregroundTint="@color/white"
                     android:hint="Enter description"
@@ -137,8 +138,9 @@
                     android:textColorHint="@color/light_gray"
                     android:textColorLink="@color/white"
                     android:textSize="22sp"
-                    app:layout_constraintTop_toBottomOf="@+id/enterName"
-                    tools:layout_editor_absoluteX="10dp" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/enterName" />
 
                 <EditText
                     android:id="@+id/enterName"
