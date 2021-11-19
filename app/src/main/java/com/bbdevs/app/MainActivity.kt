@@ -56,6 +56,10 @@ class MainActivity : AppCompatActivity() {
             val bmp = BitmapFactory.decodeStream(inStream)
             apiCatImg.setImageBitmap(bmp)
         }
+
+        removeCatPicBtn.setOnClickListener {
+            apiCatImg.setImageBitmap(null)
+        }
 //        addUserInfo.setOnClickListener{
 //            val balance = enterBalance.text.toString().toInt()
 //            val catHealth = enterCatHealth.text.toString().toInt()

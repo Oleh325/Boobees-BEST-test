@@ -109,6 +109,14 @@
         app:layout_constraintTop_toBottomOf="@+id/feedMeBtn"
         app:layout_constraintVertical_bias="0.19999999" />
 
+    <Button
+        android:id="@+id/removeCatPicBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove cat pic"
+        app:layout_constraintBottom_toTopOf="@+id/todo_list"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/todo_list"
         android:layout_width="match_parent"
@@ -214,7 +222,5 @@
         android:layout_height="wrap_content"
         android:text="New cat pic"
         app:layout_constraintBottom_toTopOf="@+id/todo_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/balanceTxt" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
