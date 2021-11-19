@@ -1,17 +1,29 @@
 package com.bbdevs.app
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bbdevs.app.service.UserInfoService
+import com.beust.klaxon.Klaxon
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.InputStream
+import java.net.URL
+
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val db = CatAppDB(this, null)
         val userInfoService = UserInfoService(db)
+
+        val policy = ThreadPolicy.Builder()
+            .permitAll().build()
+        StrictMode.setThreadPolicy(policy)
 
         addTask.setOnClickListener {
             val intent = Intent(this, CreateTaskActivity::class.java)
@@ -35,6 +47,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        newCatPicBtn.setOnClickListener {
+            val api_key = "b74b2180-8fae-4296-a89d-cf00fdb1abaa"
+            val response = URL("https://api.thecatapi.com/v1/images/search?api_key=$api_key").readText()
+            val imgUrl = Klaxon().parse<ApiResponse>(response.subSequence(1, response.length - 1).toString())?.url
+            println(imgUrl)
+            val inStream: InputStream = URL(imgUrl).openStream()
+            val bmp = BitmapFactory.decodeStream(inStream)
+            apiCatImg.setImageBitmap(bmp)
+        }
+
+        removeCatPicBtn.setOnClickListener {
+            apiCatImg.setImageBitmap(null)
+        }
 //        addUserInfo.setOnClickListener{
 //            val balance = enterBalance.text.toString().toInt()
 //            val catHealth = enterCatHealth.text.toString().toInt()
