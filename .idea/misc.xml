@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.36974358974358973" />
+        <entry key="..\:/My Projects/Cat Organiser/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/custom_button.xml" value="0.3765625" />
+        <entry key="app/src/main/res/drawable/feedmebtn.xml" value="0.2515625" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/drawable/listgrad.xml" value="0.2515625" />
+        <entry key="app/src/main/res/drawable/roundedcorners.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/drawable/roundstyle.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/layout/activity_create_task.xml" value="0.18231564605469727" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3387819702199494" />
+        <entry key="app/src/main/res/layout/mybutton.xml" value="0.2015625" />
+        <entry key="app/src/main/res/layout/todo_item.xml" value="0.715238775449027" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
