@@ -1,203 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:background="@color/bg">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_panel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/home_week"
+            android:layout_width="111dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/week_num"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="60"
+            android:progressDrawable="@drawable/progressbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_week" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="277dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/body_cat_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_panel" />
+
+
+    <Button
+        android:id="@+id/feed_me_btn"
+        style="@style/Theme.CatOrganiser"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/listgrad"
+        android:text="@string/feed_me"
+        android:textColor="#FFF"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gifImageView" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/todo_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:maxHeight="330dp"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginEnd="10dp"
+            android:paddingLeft="4dp"
+            android:paddingTop="4dp"
+            android:paddingRight="4dp"
+            android:paddingBottom="4dp"
+            android:text="@string/plus"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView" />
 
-            <EditText
-                android:id="@+id/enterName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20sp"
-                android:hint="Enter task name"
-                android:textSize="22sp" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="1dp"
+            android:background="@color/light_gray"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:text="To-do list:"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-            <EditText
-                android:id="@+id/enterDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20sp"
-                android:hint="Enter description"
-                android:textSize="22sp" />
+        <ScrollView
+            android:id="@+id/scrollView5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/enterReward"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20sp"
-                android:hint="Choose task's reward"
-                android:textSize="22sp" />
-
-            <EditText
-                android:id="@+id/enterDeadline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20sp"
-                android:hint="Enter task's deadline"
-                android:textSize="22sp" />
-            <EditText
-                android:id="@+id/enterBalance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20sp"
-                android:hint="Enter balance"
-                android:textSize="22sp" />
-            <EditText
-                android:id="@+id/enterCatHealth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20sp"
-                android:hint="Enter cat health"
-                android:textSize="22sp" />
-
-            <Button
-                android:id="@+id/addTask"
-                android:layout_width="150sp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20sp"
-                android:background="#0000ff"
-                android:text="Add Task"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/addUserInfo"
-                android:layout_width="200sp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20sp"
-                android:background="#0000ff"
-                android:text="Add UserInfo"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/printTask"
-                android:layout_width="170sp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20sp"
-                android:background="@color/purple_500"
-                android:text="Print Task"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/printUserInfo"
-                android:layout_width="220sp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20sp"
-                android:background="@color/purple_500"
-                android:text="Print UserInfo"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
-
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/Name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20sp"
-                    android:layout_weight="1"
-                    android:padding="10sp"
-                    android:text="Name\n\n"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="22sp" />
+            </androidx.recyclerview.widget.RecyclerView>
+        </ScrollView>
 
-                <TextView
-                    android:id="@+id/Description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20sp"
-                    android:layout_weight="1"
-                    android:padding="10sp"
-                    android:text="Description\n\n"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="22sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/dark_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabIconTint="@color/white"
+        app:tabIndicatorColor="#fff"
+        app:tabTextColor="#FFFFFF">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/Reward"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20sp"
-                    android:layout_weight="1"
-                    android:padding="10sp"
-                    android:text="Reward\n\n"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="22sp" />
-
-                <TextView
-                    android:id="@+id/Deadline"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20sp"
-                    android:layout_weight="1"
-                    android:padding="10sp"
-                    android:text="Deadline\n\n"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/Balance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20sp"
-                    android:layout_weight="1"
-                    android:padding="10sp"
-                    android:text="Balance\n\n"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="22sp" />
-
-                <TextView
-                    android:id="@+id/CatHealth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20sp"
-                    android:layout_weight="1"
-                    android:padding="10sp"
-                    android:text="CatHealth\n\n"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/timer_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:foregroundTint="#FFFFFF"
+            android:icon="@drawable/pomodorowhite"
+            android:tint="#FFFFFF" />
 
 
-</LinearLayout>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:foregroundTint="#FFFFFF"
+            android:icon="@drawable/homeicon"
+            android:tint="#FFFFFF" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/statisticsicon"
+            app:tint="#FFFFFF" />
+    </com.google.android.material.tabs.TabLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
