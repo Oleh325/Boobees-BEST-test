@@ -87,7 +87,7 @@
         style="@style/Theme.CatOrganiser"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:foreground="@drawable/listgrad"
+        android:background="@drawable/listgrad"
         android:text="@string/feed_me"
         android:textColor="#FFF"
         android:textSize="16sp"
@@ -113,6 +113,7 @@
         android:id="@+id/removeCatPicBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/listgrad"
         android:text="Remove cat pic"
         app:layout_constraintBottom_toTopOf="@+id/todo_list"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -132,6 +133,7 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/dark_gray"
             android:paddingLeft="4dp"
             android:paddingTop="4dp"
             android:paddingRight="4dp"
@@ -220,6 +222,7 @@
         android:id="@+id/newCatPicBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/listgrad"
         android:text="New cat pic"
         app:layout_constraintBottom_toTopOf="@+id/todo_list"
         app:layout_constraintStart_toStartOf="parent" />
